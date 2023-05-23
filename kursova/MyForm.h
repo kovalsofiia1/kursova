@@ -582,297 +582,33 @@ namespace kursova {
 #pragma endregion
 
 	private:
-		List < double >^ x = gcnew List<double>();
-		List<double>^ y = gcnew List<double>();
+	
 		Points *p = new Points();
 		CubicSplineInterpolation* cubic =new CubicSplineInterpolation();
 		LinearInterpolation* inter = new LinearInterpolation();
+		bool dotEnteredx = false;
+		bool dotEnteredy = false;
+		bool minusEnteredx = false;
+		bool minusEnteredy = false;
 
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		String^ x1 = x_input->Text;
-		String^ y1 = y_input->Text;
-
-		string x_inp = marshal_as<string>(x1);
-		string y_inp = marshal_as<string>(y1);
-		double xx, yy;
-		
-
-		for (int i = 0; i < x->Count; i++) {
-			std::cout << x[i] << " ";
-		}
-		std::cout << endl;
-		if (x_inp == "" || y_inp == "") {
-			MessageBox::Show("Please input coordinates!");
-		}
-		else {
-			xx = Convert::ToDouble(x1);
-			yy = Convert::ToDouble(y1);
-			int same = 0;
-			for (int i = 0; i < x->Count; i++) {
-				if (xx == x[i]) {
-					same = 1;
-					MessageBox::Show("You can't have two points with the same x coordinate!");
-				}
-			}
-			if (same == 0) {
-				x_input->Text = "";
-				y_input->Text = "";
-				x->Add(xx);
-				y->Add(yy);
-				value_table->Rows->Add(x1, y1);
-			}
-		}
-
-		dotEnteredx = false;
-		dotEnteredy = false;
-	}
-	private:bool dotEnteredx = false;
-	private:bool dotEnteredy = false;
-	private: System::Void x_input_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != '-' && e->KeyChar != '\b') {
-			MessageBox::Show("Please enter only numbers.");
-			e->Handled = true;
-		}
-		else if (e->KeyChar == ',' && dotEnteredx) {
-			MessageBox::Show("You have already entered a decimal point.");
-			e->Handled = true;
-		}
-		else {
-			dotEnteredx = (e->KeyChar == ',') ? true : dotEnteredx;
-		}
-
-	}
-	private: System::Void y_input_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != ',' && e->KeyChar != '-' && e->KeyChar != '\b') {
-			MessageBox::Show("Please enter only numbers.");
-			e->Handled = true;
-		}
-		else if (e->KeyChar == ',' && dotEnteredy) {
-			MessageBox::Show("You have already entered a decimal point.");
-			e->Handled = true;
-		}
-		else {
-			dotEnteredy = (e->KeyChar == ',') ? true : dotEnteredy;
-		}
-	}
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
+	
+	private: System::Void x_input_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+	private: System::Void y_input_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
 
 
-	private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
-		if (!Char::IsDigit(e->KeyChar) && e->KeyChar != '\b') {
-			MessageBox::Show("Only integer values allowed.");
-			e->Handled = true;
-		}
-
-	}
-	private: System::Void value_table_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-		if (e->RowIndex >= 0)
-		{
-			// Retrieve the index of the selected row
-			int rowIndex = e->RowIndex;
-
-			// Remove the row from the DataGridView
-			value_table->Rows->RemoveAt(rowIndex);
-
-			x->RemoveAt(rowIndex);
-			y->RemoveAt(rowIndex);
-		}
-	}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		linear_inter_points->Visible = FALSE;
-		cubic_inter_points->Visible = FALSE;
-		L_interp_label->Visible = FALSE;
-		C_interp_label->Visible = FALSE;
-		cubic_splines->Items->Clear();
-		cubic_splines->Visible=FALSE;
-		cubic_inter_points->Rows->Clear();
-		linear_inter_points->Rows->Clear();
-		chart->Series[0]->Points->Clear();
-		chart->Series[1]->Points->Clear();
-		p->Clear_Points();
-		p->Fill_Points(x, y);
-		p->Print_Points();
-		cubic_splines->Height = p->GetSize() * 20;
-
-		
-		if (p->GetSize() <= 1) {
-			MessageBox::Show("You have entered only 1 point. You need minimum 2");
-		}
-		else if (num_of_interp_points->Text == "") {
-			MessageBox::Show("You haven't entered the number of interpolated points!");
-		}
-		else{
-			int num = Convert::ToInt32(num_of_interp_points->Text);
-			if (ch_b_cubic->Checked && ch_b_linear->Checked) {
-				inter->SetNum(num);
-				inter->linear(p);
-				//std::cout << "\nCubic Spline Interpolation" << endl;
-				cubic->SetNum(num);
-				cubic->build_splines(p);
-				cubic->interpolate(p); 
-				show_cubic_points(cubic);
-				show_linear_points(inter);
-				cubic_splines->Visible = TRUE;
-				print_splines(cubic);
-				build_graphic(cubic);
-				build_line_graphic(inter);
-				
-			}
-			else if (ch_b_cubic->Checked) {
-				cubic->SetNum(num);
-				cubic->build_splines(p);
-				cubic->interpolate(p);
-				show_cubic_points(cubic);
-				cubic_splines->Visible = TRUE;
-				print_splines(cubic);
-				build_graphic(cubic);
-			}
-			else if (ch_b_linear->Checked) {
-				inter->SetNum(num);
-				inter->linear(p);
-				show_linear_points(inter);
-				build_line_graphic(inter);
-			}
-			else {
-				MessageBox::Show("You haven't chosen any method!");
-			}
-		}
-		
-
-	}
-	void show_linear_points(LinearInterpolation* inter) {
-			  
-		for (int i = 0; i < inter->GetNumOfP(); i++) {
-			linear_inter_points->Rows->Add(inter->get_int_x_at(i),inter->get_int_y_at(i));
-		}
-		linear_inter_points->Visible = TRUE;
-		L_interp_label->Visible = TRUE;
-		}
-	void show_cubic_points(CubicSplineInterpolation* inter) {
-		for (int i = 0; i < inter->GetNumOfP(); i++) {
-			cubic_inter_points->Rows->Add(inter->get_int_x_at(i), inter->get_int_y_at(i));
-		}
-		cubic_inter_points->Visible = TRUE;
-		C_interp_label->Visible = TRUE;
-	}
-	void print_splines(CubicSplineInterpolation* inter) {
-		cubic_splines->Items->Add("Cubic splines: ");
-		int n = 10000;
-		for (int i = 1; i < p->GetSize(); i++) {
-			double d = round((inter->get_d_at(i)/6)*n)/n;
-			double c = round((inter->get_c_at(i)/2)*n)/n;
-			double b = round(inter->get_b_at(i)*n)/n;
-			double a = round(inter->get_a_at(i)*n)/n;
-			double x = p->GetX(i);
-			cubic_splines->Items->Add("S"+i+"(x) = "+d+" *(x - "+ x+")^3 + "+c+" *(x - "+x+")^2 + "+b+" *(x - "+x+") + "+a);
-		}
-	}
-	void build_graphic(CubicSplineInterpolation *inter) {
-		double yMin, yMax;
-		find_Y_M (yMin, yMax, p);
-		chart->ChartAreas[0]->AxisX->Minimum = p->GetX(0)-1;
-		chart->ChartAreas[0]->AxisX->Maximum = p->GetX(p->GetSize() - 1)+1;
-
-		chart->ChartAreas[0]->AxisY->Minimum = yMin-1;
-		chart->ChartAreas[0]->AxisY->Maximum = yMax+1;
-
-		double a = p->GetX(0), b = p->GetX(p->GetSize() - 1), h = 0.1, x, y;
-		chart->Series[0]->Points->Clear();
-		x = a;
-		int i = 1;
-		while (x <= b) {
-			if (x > p->GetX(i)) {
-				i++;
-			}
-			double d = inter->get_d_at(i) / 6;
-			double c = inter->get_c_at(i) / 2;
-			double b = inter->get_b_at(i) ;
-			double a = inter->get_a_at(i) ;
-			double dx = x - p->GetX(i);
-			y = a + b * dx + c * dx * dx + d * dx * dx * dx;
-
-			chart->Series[0]->Points->AddXY(x, y);
-			x += h;
-		}
-	}
-	void build_line_graphic(LinearInterpolation *inter) {
-		double yMin, yMax;
-		find_Y_M(yMin, yMax, p);
-		chart->ChartAreas[0]->AxisX->Minimum = p->GetX(0)-1;
-		chart->ChartAreas[0]->AxisX->Maximum = p->GetX(p->GetSize() - 1)+1;
-
-		chart->ChartAreas[0]->AxisY->Minimum = yMin-1;
-		chart->ChartAreas[0]->AxisY->Maximum = yMax+1;
-
-		double a = p->GetX(0), b = p->GetX(p->GetSize() - 1), h = 0.1, x, y;
-		chart->Series[1]->Points->Clear();
-		x = a;
-		int i = 0;
-		while (x < b) {
-			
-			y = p->GetY(i) +
-				((p->GetY(i+1) - p->GetY(i)) / (p->GetX(i+1) - p->GetX(i))) *
-				(x - p->GetX(i));
-			chart->Series[1]->Points->AddXY(x, y);
-			x += h;
-			if (x > p->GetX(i+1)) {
-				i++;
-			}
-		}
-	}
+	private: System::Void textBox1_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e);
+	private: System::Void value_table_CellDoubleClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e);
+		   void show_linear_points(LinearInterpolation* inter);
+		   void show_cubic_points(CubicSplineInterpolation* inter);
+		   void print_splines(CubicSplineInterpolation* inter);
+		   void build_graphic(CubicSplineInterpolation* inter);
+		   void build_line_graphic(LinearInterpolation* inter);
 	
 	
-private: System::Void Clear_all_button_Click(System::Object^ sender, System::EventArgs^ e) {
-	chart->Series[0]->Points->Clear();
-	chart->Series[1]->Points->Clear();
-	cubic_splines->Items->Clear();
-	cubic_splines->Visible = FALSE;
-
-	num_of_interp_points->Text = "";
-	p->Clear_Points();
-	p->Print_Points();
-	x->Clear();
-	y->Clear();
-	cubic_inter_points->Rows->Clear();
-	linear_inter_points->Rows->Clear();
-	cubic_inter_points->Visible = FALSE;
-	C_interp_label->Visible = FALSE;
-	linear_inter_points->Visible = FALSE;
-	L_interp_label->Visible = FALSE;
-	ch_b_cubic->Checked = FALSE;
-	ch_b_linear->Checked = FALSE;
-	value_table->Rows->Clear();
-	Points* newp = new Points();
-	delete p;
-	p = newp;
-
-
-
-}
-private: System::Void SaveToFile_Click(System::Object^ sender, System::EventArgs^ e) {
-	if (cubic_inter_points->Rows->Count == 0 && linear_inter_points->Rows->Count == 0) {
-		MessageBox::Show("You can`t save results without interpolating!");
-	}
-	else {
-		if (file_name->Visible == FALSE) {
-			file_name->Visible = TRUE;
-			input_name->Visible = TRUE;
-		}
-		else {
-			if (ch_b_cubic->Checked && ch_b_linear->Checked) {
-				inter->write_to_file(p, marshal_as<string>(file_name->Text));
-				cubic->write_to_file(p, marshal_as<string>(file_name->Text));
-
-			}
-			else if (ch_b_cubic->Checked) {
-				cubic->write_to_file(p, marshal_as<string>(file_name->Text));
-			}
-			else if (ch_b_linear->Checked) {
-				inter->write_to_file(p, marshal_as<string>(file_name->Text));
-
-			}
-		}
-	}
-}
+private: System::Void Clear_all_button_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void SaveToFile_Click(System::Object^ sender, System::EventArgs^ e);
 
 };
 	
