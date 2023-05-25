@@ -158,8 +158,8 @@ namespace kursova {
 			// 
 			this->Addbutton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Addbutton->ForeColor = System::Drawing::Color::DarkOrchid;
-			this->Addbutton->Location = System::Drawing::Point(386, 266);
+			this->Addbutton->ForeColor = System::Drawing::Color::Navy;
+			this->Addbutton->Location = System::Drawing::Point(385, 266);
 			this->Addbutton->Name = L"Addbutton";
 			this->Addbutton->Size = System::Drawing::Size(146, 40);
 			this->Addbutton->TabIndex = 0;
@@ -172,8 +172,8 @@ namespace kursova {
 			this->Header->AutoSize = true;
 			this->Header->Font = (gcnew System::Drawing::Font(L"Monotype Corsiva", 18, static_cast<System::Drawing::FontStyle>((System::Drawing::FontStyle::Bold | System::Drawing::FontStyle::Italic)),
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
-			this->Header->ForeColor = System::Drawing::Color::DarkOrchid;
-			this->Header->Location = System::Drawing::Point(350, 9);
+			this->Header->ForeColor = System::Drawing::Color::Navy;
+			this->Header->Location = System::Drawing::Point(349, 9);
 			this->Header->Name = L"Header";
 			this->Header->Size = System::Drawing::Size(473, 44);
 			this->Header->TabIndex = 1;
@@ -182,7 +182,7 @@ namespace kursova {
 			// 
 			// x_input
 			// 
-			this->x_input->Location = System::Drawing::Point(72, 272);
+			this->x_input->Location = System::Drawing::Point(72, 273);
 			this->x_input->Name = L"x_input";
 			this->x_input->Size = System::Drawing::Size(100, 26);
 			this->x_input->TabIndex = 4;
@@ -213,7 +213,7 @@ namespace kursova {
 			this->Choosemethod_l->AutoSize = true;
 			this->Choosemethod_l->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Choosemethod_l->ForeColor = System::Drawing::Color::DarkOrchid;
+			this->Choosemethod_l->ForeColor = System::Drawing::Color::Navy;
 			this->Choosemethod_l->Location = System::Drawing::Point(27, 91);
 			this->Choosemethod_l->Name = L"Choosemethod_l";
 			this->Choosemethod_l->Size = System::Drawing::Size(308, 25);
@@ -225,8 +225,8 @@ namespace kursova {
 			this->AddPoints_l->AutoSize = true;
 			this->AddPoints_l->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->AddPoints_l->ForeColor = System::Drawing::Color::DarkOrchid;
-			this->AddPoints_l->Location = System::Drawing::Point(37, 225);
+			this->AddPoints_l->ForeColor = System::Drawing::Color::Navy;
+			this->AddPoints_l->Location = System::Drawing::Point(38, 225);
 			this->AddPoints_l->Name = L"AddPoints_l";
 			this->AddPoints_l->Size = System::Drawing::Size(289, 25);
 			this->AddPoints_l->TabIndex = 8;
@@ -237,7 +237,7 @@ namespace kursova {
 			this->x_l->AutoSize = true;
 			this->x_l->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 11, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->x_l->Location = System::Drawing::Point(28, 272);
+			this->x_l->Location = System::Drawing::Point(29, 273);
 			this->x_l->Name = L"x_l";
 			this->x_l->Size = System::Drawing::Size(31, 26);
 			this->x_l->TabIndex = 9;
@@ -248,7 +248,7 @@ namespace kursova {
 			this->y_l->AutoSize = true;
 			this->y_l->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->y_l->Location = System::Drawing::Point(205, 272);
+			this->y_l->Location = System::Drawing::Point(205, 273);
 			this->y_l->Name = L"y_l";
 			this->y_l->Size = System::Drawing::Size(30, 25);
 			this->y_l->TabIndex = 10;
@@ -256,7 +256,7 @@ namespace kursova {
 			// 
 			// y_input
 			// 
-			this->y_input->Location = System::Drawing::Point(251, 271);
+			this->y_input->Location = System::Drawing::Point(250, 271);
 			this->y_input->Name = L"y_input";
 			this->y_input->Size = System::Drawing::Size(100, 26);
 			this->y_input->TabIndex = 11;
@@ -279,7 +279,7 @@ namespace kursova {
 			legend1->Name = L"Legend1";
 			this->chart->Legends->Add(legend1);
 			this->chart->Location = System::Drawing::Point(606, 91);
-			this->chart->Margin = System::Windows::Forms::Padding(1);
+			this->chart->Margin = System::Windows::Forms::Padding(2, 1, 2, 1);
 			this->chart->Name = L"chart";
 			this->chart->Palette = System::Windows::Forms::DataVisualization::Charting::ChartColorPalette::Berry;
 			series1->ChartArea = L"ChartArea1";
@@ -305,7 +305,7 @@ namespace kursova {
 			this->Num_of_p_l->AutoSize = true;
 			this->Num_of_p_l->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Num_of_p_l->ForeColor = System::Drawing::Color::DarkOrchid;
+			this->Num_of_p_l->ForeColor = System::Drawing::Color::Navy;
 			this->Num_of_p_l->Location = System::Drawing::Point(20, 564);
 			this->Num_of_p_l->Name = L"Num_of_p_l";
 			this->Num_of_p_l->Size = System::Drawing::Size(200, 40);
@@ -314,7 +314,7 @@ namespace kursova {
 			// 
 			// num_of_interp_points
 			// 
-			this->num_of_interp_points->Location = System::Drawing::Point(231, 578);
+			this->num_of_interp_points->Location = System::Drawing::Point(231, 577);
 			this->num_of_interp_points->Name = L"num_of_interp_points";
 			this->num_of_interp_points->Size = System::Drawing::Size(100, 26);
 			this->num_of_interp_points->TabIndex = 16;
@@ -324,7 +324,7 @@ namespace kursova {
 			// 
 			this->Interpolate->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Interpolate->ForeColor = System::Drawing::Color::DarkOrchid;
+			this->Interpolate->ForeColor = System::Drawing::Color::Navy;
 			this->Interpolate->Location = System::Drawing::Point(358, 564);
 			this->Interpolate->Name = L"Interpolate";
 			this->Interpolate->Size = System::Drawing::Size(158, 40);
@@ -339,20 +339,19 @@ namespace kursova {
 			this->value_table->AllowUserToDeleteRows = false;
 			this->value_table->AllowUserToResizeColumns = false;
 			this->value_table->AllowUserToResizeRows = false;
-			this->value_table->BackgroundColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->value_table->BackgroundColor = System::Drawing::Color::LightCyan;
 			this->value_table->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->value_table->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->value_table->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
 				this->Column1,
 					this->Column2
 			});
-			this->value_table->Location = System::Drawing::Point(55, 328);
+			this->value_table->Location = System::Drawing::Point(56, 327);
 			this->value_table->Name = L"value_table";
 			this->value_table->ReadOnly = true;
 			this->value_table->RowHeadersWidth = 10;
 			this->value_table->RowTemplate->Height = 28;
-			this->value_table->Size = System::Drawing::Size(197, 205);
+			this->value_table->Size = System::Drawing::Size(196, 205);
 			this->value_table->TabIndex = 18;
 			this->value_table->CellDoubleClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::value_table_CellDoubleClick);
 			// 
@@ -379,15 +378,14 @@ namespace kursova {
 			// 
 			this->linear_inter_points->AllowUserToAddRows = false;
 			this->linear_inter_points->AllowUserToDeleteRows = false;
-			this->linear_inter_points->BackgroundColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->linear_inter_points->BackgroundColor = System::Drawing::Color::LightCyan;
 			this->linear_inter_points->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->linear_inter_points->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->linear_inter_points->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
 				this->xp,
 					this->yp
 			});
-			this->linear_inter_points->Location = System::Drawing::Point(629, 461);
+			this->linear_inter_points->Location = System::Drawing::Point(628, 461);
 			this->linear_inter_points->Name = L"linear_inter_points";
 			this->linear_inter_points->ReadOnly = true;
 			this->linear_inter_points->RowHeadersWidth = 10;
@@ -416,8 +414,7 @@ namespace kursova {
 			// 
 			this->cubic_inter_points->AllowUserToAddRows = false;
 			this->cubic_inter_points->AllowUserToDeleteRows = false;
-			this->cubic_inter_points->BackgroundColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->cubic_inter_points->BackgroundColor = System::Drawing::Color::LightCyan;
 			this->cubic_inter_points->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->cubic_inter_points->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->cubic_inter_points->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
@@ -454,8 +451,8 @@ namespace kursova {
 			this->L_interp_label->AutoSize = true;
 			this->L_interp_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->L_interp_label->ForeColor = System::Drawing::Color::DarkOrchid;
-			this->L_interp_label->Location = System::Drawing::Point(602, 424);
+			this->L_interp_label->ForeColor = System::Drawing::Color::Navy;
+			this->L_interp_label->Location = System::Drawing::Point(601, 424);
 			this->L_interp_label->Name = L"L_interp_label";
 			this->L_interp_label->Size = System::Drawing::Size(203, 22);
 			this->L_interp_label->TabIndex = 21;
@@ -467,8 +464,8 @@ namespace kursova {
 			this->C_interp_label->AutoSize = true;
 			this->C_interp_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->C_interp_label->ForeColor = System::Drawing::Color::DarkOrchid;
-			this->C_interp_label->Location = System::Drawing::Point(881, 413);
+			this->C_interp_label->ForeColor = System::Drawing::Color::Navy;
+			this->C_interp_label->Location = System::Drawing::Point(880, 413);
 			this->C_interp_label->Name = L"C_interp_label";
 			this->C_interp_label->Size = System::Drawing::Size(235, 44);
 			this->C_interp_label->TabIndex = 22;
@@ -478,13 +475,12 @@ namespace kursova {
 			// 
 			// cubic_splines
 			// 
-			this->cubic_splines->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(255)));
+			this->cubic_splines->BackColor = System::Drawing::Color::SkyBlue;
 			this->cubic_splines->FormattingEnabled = true;
 			this->cubic_splines->ItemHeight = 20;
 			this->cubic_splines->Location = System::Drawing::Point(33, 619);
 			this->cubic_splines->Name = L"cubic_splines";
-			this->cubic_splines->Size = System::Drawing::Size(542, 224);
+			this->cubic_splines->Size = System::Drawing::Size(542, 164);
 			this->cubic_splines->TabIndex = 23;
 			this->cubic_splines->Visible = false;
 			// 
@@ -492,8 +488,8 @@ namespace kursova {
 			// 
 			this->Clear_all_button->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Clear_all_button->ForeColor = System::Drawing::Color::DarkOrchid;
-			this->Clear_all_button->Location = System::Drawing::Point(629, 753);
+			this->Clear_all_button->ForeColor = System::Drawing::Color::Navy;
+			this->Clear_all_button->Location = System::Drawing::Point(628, 753);
 			this->Clear_all_button->Name = L"Clear_all_button";
 			this->Clear_all_button->Size = System::Drawing::Size(120, 55);
 			this->Clear_all_button->TabIndex = 24;
@@ -505,7 +501,7 @@ namespace kursova {
 			// 
 			this->SaveToFile->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->SaveToFile->ForeColor = System::Drawing::Color::DarkOrchid;
+			this->SaveToFile->ForeColor = System::Drawing::Color::Navy;
 			this->SaveToFile->Location = System::Drawing::Point(771, 753);
 			this->SaveToFile->Name = L"SaveToFile";
 			this->SaveToFile->Size = System::Drawing::Size(122, 55);
@@ -520,29 +516,26 @@ namespace kursova {
 			this->file_name->Name = L"file_name";
 			this->file_name->Size = System::Drawing::Size(171, 26);
 			this->file_name->TabIndex = 26;
-			this->file_name->Visible = false;
 			// 
 			// input_name
 			// 
 			this->input_name->AutoSize = true;
 			this->input_name->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->input_name->ForeColor = System::Drawing::Color::DarkOrchid;
+			this->input_name->ForeColor = System::Drawing::Color::Navy;
 			this->input_name->Location = System::Drawing::Point(914, 753);
 			this->input_name->Name = L"input_name";
 			this->input_name->Size = System::Drawing::Size(204, 22);
 			this->input_name->TabIndex = 27;
 			this->input_name->Text = L"Введіть назву файлу";
-			this->input_name->Visible = false;
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(192)), static_cast<System::Int32>(static_cast<System::Byte>(255)),
-				static_cast<System::Int32>(static_cast<System::Byte>(192)));
-			this->ClientSize = System::Drawing::Size(1178, 1044);
+			this->BackColor = System::Drawing::Color::LightCyan;
+			this->ClientSize = System::Drawing::Size(1177, 807);
 			this->Controls->Add(this->input_name);
 			this->Controls->Add(this->file_name);
 			this->Controls->Add(this->SaveToFile);
@@ -570,7 +563,7 @@ namespace kursova {
 			this->Controls->Add(this->Addbutton);
 			this->Name = L"MyForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"MyForm";
+			this->Text = L"Задачі інтерполяції";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->value_table))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->linear_inter_points))->EndInit();
@@ -605,7 +598,7 @@ namespace kursova {
 		   void print_splines(CubicSplineInterpolation* inter);
 		   void build_graphic(CubicSplineInterpolation* inter);
 		   void build_line_graphic(LinearInterpolation* inter);
-	
+		   void print_linear(LinearInterpolation* inter);
 	
 private: System::Void Clear_all_button_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void SaveToFile_Click(System::Object^ sender, System::EventArgs^ e);

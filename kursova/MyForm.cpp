@@ -11,7 +11,7 @@ int main() {
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::EnableVisualStyles();
 	kursova::MyForm form;
-	setlocale(LC_ALL, "uk-UA");;
+	setlocale(LC_ALL, "uk-UA");
 	//Thread.CurrentThread.CurrentCulture = new CultureInfo("uk-UA");
 	//Thread->CurrentThread.CurrentUICulture = new CultureInfo("UA");
 	Application::Run(% form);
@@ -24,21 +24,32 @@ System::Void kursova::MyForm::button1_Click(System::Object^ sender, System::Even
 		string x_inp = marshal_as<string>(x1);
 		string y_inp = marshal_as<string>(y1);
 		double xx, yy;
-		xx = Convert::ToDouble(x1);
-		yy = Convert::ToDouble(y1);
+		
 		if (x_inp == "" || y_inp == "") {
 			MessageBox::Show("Please input coordinates!");
+		}
+		else if (x_inp.find("-") != -1 && x_inp.find("-") >0 || y_inp.find("-") != -1 && y_inp.find("-") >0) {
+				MessageBox::Show("Minus in the wrong place!");
+				x_input->Text = "";
+				y_input->Text = "";
+		}
+		else if (x_inp.find(",") != -1 && x_inp.find(",") == 0 || y_inp.find(",") != -1 && y_inp.find(",") == 0) {
+			MessageBox::Show("Decimal point in the wrong place!");
+			x_input->Text = "";
+			y_input->Text = "";
 		}
 		else if (p->GetSize() > 20) {
 			MessageBox::Show("Maximum 20 points!");
 		}
-		else if (xx > 1000 || xx < -1000) {
+		else if (Convert::ToDouble(x1) > 1000 || Convert::ToDouble(x1) < -1000) {
 			MessageBox::Show("Maximum x value is 1000 and minimum is -1000!");
 		}
-		else if (yy > 1000 || yy < -1000) {
+		else if (Convert::ToDouble(y1) > 1000 || Convert::ToDouble(y1) < -1000) {
 			MessageBox::Show("Maximum y value is 1000 and minimum is -1000!");
 		}
 		else {
+			xx = Convert::ToDouble(x1);
+			yy = Convert::ToDouble(y1);
 			p->check_if_present(xx);
 			if (p->check_if_present(xx) == false) {
 				x_input->Text = "";
@@ -140,7 +151,7 @@ System::Void kursova::MyForm::button2_Click(System::Object^ sender, System::Even
 		chart->Series[1]->Points->Clear();
 
 		p->Print_Points();
-		cubic_splines->Height = p->GetSize() * 20;
+		cubic_splines->Height = p->GetSize() * 30;
 
 
 		if (p->GetSize() <= 1) {
@@ -148,6 +159,10 @@ System::Void kursova::MyForm::button2_Click(System::Object^ sender, System::Even
 		}
 		else if (num_of_interp_points->Text == "") {
 			MessageBox::Show("You haven't entered the number of interpolated points!");
+		}
+		else if (Convert::ToInt32(num_of_interp_points->Text)>1001 ) {
+			MessageBox::Show("Maximum number of interpolated points is 1000!");
+			num_of_interp_points->Text="";
 		}
 		else {
 			int num = Convert::ToInt32(num_of_interp_points->Text);
@@ -161,6 +176,7 @@ System::Void kursova::MyForm::button2_Click(System::Object^ sender, System::Even
 				show_cubic_points(cubic);
 				show_linear_points(inter);
 				cubic_splines->Visible = TRUE;
+				print_linear(inter);
 				print_splines(cubic);
 				build_graphic(cubic);
 				build_line_graphic(inter);
@@ -176,6 +192,7 @@ System::Void kursova::MyForm::button2_Click(System::Object^ sender, System::Even
 				build_graphic(cubic);
 			}
 			else if (ch_b_linear->Checked) {
+				print_linear(inter);
 				inter->SetNum(num);
 				inter->linear(p);
 				show_linear_points(inter);
@@ -220,6 +237,15 @@ void kursova::MyForm::print_splines(CubicSplineInterpolation* inter) {
 				   cubic_splines->Items->Add("S" + i + "(x) = " + d + " *(x - " + x + ")^3 + " + c + " *(x - " + x + ")^2 + " + b + " *(x - " + x + ") + " + a);
 			   }
 		   }
+void kursova::MyForm::print_linear(LinearInterpolation* inter) {
+	cubic_splines->Items->Add("Linear functions");
+	for (int i = 0; i < p->GetSize()-1; i++) {
+		double x = p->GetX(i);
+		cubic_splines->Items->Add("f" + i + "(x) = " + p->GetY(i) + " + (("+ p->GetY(i + 1)+ " - " + p->GetY(i)+ ") / ( " + p->GetX(i + 1)+" - "+ p->GetX(i)+")) * ( x - "+ p->GetX(i)+" ) ;");
+	
+	}
+
+}
 void kursova::MyForm::build_graphic(CubicSplineInterpolation* inter) {
 			   double yMin, yMax;
 			   find_Y_M(yMin, yMax, p);

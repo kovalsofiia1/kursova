@@ -81,9 +81,7 @@ Interpolation::Interpolation(int num) {
 int Interpolation::GetNumOfP() const {
     return num_of_interpolated_points;
 }
-void Interpolation::SetNum(int num) {
-    num_of_interpolated_points = num;
-}
+
 
 
 LinearInterpolation::LinearInterpolation(const int num) {
@@ -109,7 +107,6 @@ void LinearInterpolation::linear(Points* dots) {
     for (int i = 0; i < p; i++) {
 
         xp[i] = dots->GetX(0) + i * step;
-        //cout<<xp[i]<<endl;
         while (xp[i] > dots->GetX(j) && xp[i] > dots->GetX(j + 1)) {
             j++;
         }
@@ -144,6 +141,11 @@ void LinearInterpolation::write_to_file(Points* dots, string name) {
     file << "Interpolated points :" << endl;
     for (int i = 0; i < num_of_interpolated_points; i++) {
         file << "( " << xp[i] << " ; " << yp[i] << " )" << endl;
+    }
+    file<<"Linear functions: "<<endl;
+    for (int i = 0; i < dots->GetSize() - 1; i++) {
+        file<<"f" << i << "(x) = " << dots->GetY(i) << " + (("  << dots->GetY(i + 1) << " - "  << dots->GetY(i) << ") / ( " << dots->GetX(i + 1) << " - " << dots->GetX(i) << ")) * ( x - " << dots->GetX(i) << " ) ;"<<endl;
+
     }
     file.close();
 
@@ -270,7 +272,7 @@ void CubicSplineInterpolation::write_to_file(Points* dots, string name) {
         double bb = round(b[i] * n) / n;
         double aa = round(a[i] * n) / n;
         double x = dots->GetX(i);
-        file << "S" << i << "(x) = " << dd << " *(x - " << x << ")^3 + " << cc << " *(x - " << x << ")^2 + " << bb << " *(x - " << x << ") + " << aa << endl;
+        file << "S" << i << "(x) = "  << dd << " *(x - "  << x << ")^3 + "  << cc << " *(x - " << x << ")^2 + "  << bb << " *(x - "  << x << ") + "  << aa << endl;
     }
     file.close();
 
