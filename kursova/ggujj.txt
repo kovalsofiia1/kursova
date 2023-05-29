@@ -1,0 +1,10 @@
+Linear Interpolation 
+Point 1: (1 ; 1 )
+Point 2: (2 ; 2 )
+Interpolated points :
+( 1 ; 1 )
+( 1.2 ; 1.2 )
+( 1.4 ; 1.4 )
+( 1.6 ; 1.6 )
+( 1.8 ; 1.8 )
+( 2 ; 2 )

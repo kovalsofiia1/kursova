@@ -1,0 +1,6 @@
+C:\Users\gr\source\repos\kursova\x64\Debug\kursova.vcxproj.AssemblyReference.cache
+C:\Users\gr\source\repos\kursova\x64\Debug\kursova.vcxproj.SuggestedBindingRedirects.cache
+C:\Users\gr\source\repos\kursova\x64\Debug\kursova.exe
+C:\Users\gr\source\repos\kursova\x64\Debug\kursova.MyForm.resources
+C:\Users\gr\source\repos\kursova\x64\Debug\kursova.vcxproj.GenerateResource.cache
+C:\Users\gr\source\repos\kursova\x64\Debug\kursova.MyForm1.resources

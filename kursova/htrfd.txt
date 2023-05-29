@@ -1,0 +1,10 @@
+
+Cubic spline Interpolation 
+Point 1: (1 ; 1 )
+Point 2: (2 ; 2 )
+Interpolated points :
+( 1 ; 1 )
+( 1.25 ; 1.25 )
+( 1.5 ; 1.5 )
+( 1.75 ; 1.75 )
+( 2 ; 2 )

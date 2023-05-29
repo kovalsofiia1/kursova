@@ -1,4 +1,5 @@
-#include "MyForm.h"
+﻿#include "MyForm.h"
+#include "MyForm1.h"
 
 using namespace System;
 using namespace System::Windows::Forms;
@@ -11,9 +12,6 @@ int main() {
 	Application::SetCompatibleTextRenderingDefault(false);
 	Application::EnableVisualStyles();
 	kursova::MyForm form;
-	setlocale(LC_ALL, "uk-UA");
-	//Thread.CurrentThread.CurrentCulture = new CultureInfo("uk-UA");
-	//Thread->CurrentThread.CurrentUICulture = new CultureInfo("UA");
 	Application::Run(% form);
 }
 
@@ -21,8 +19,8 @@ System::Void kursova::MyForm::button1_Click(System::Object^ sender, System::Even
 		String^ x1 = x_input->Text;
 		String^ y1 = y_input->Text;
 
-		string x_inp = marshal_as<string>(x1);
-		string y_inp = marshal_as<string>(y1);
+		std::string x_inp = marshal_as<std::string>(x1);
+		std::string y_inp = marshal_as<std::string>(y1);
 		double xx, yy;
 		
 		if (x_inp == "" || y_inp == "") {
@@ -149,7 +147,11 @@ System::Void kursova::MyForm::button2_Click(System::Object^ sender, System::Even
 		linear_inter_points->Rows->Clear();
 		chart->Series[0]->Points->Clear();
 		chart->Series[1]->Points->Clear();
-
+		int counter_c = 0;
+		int counter_l = 0;
+		 f = gcnew MyForm1();
+		
+		
 		p->Print_Points();
 		cubic_splines->Height = p->GetSize() * 30;
 
@@ -165,38 +167,65 @@ System::Void kursova::MyForm::button2_Click(System::Object^ sender, System::Even
 			num_of_interp_points->Text="";
 		}
 		else {
+			if (characteristics->Checked) {
+
+				f->Show();
+				f->f1t1Control->Visible = FALSE;
+				f->f1t2Control->Visible = FALSE;
+				f->f1l1Control->Visible = FALSE;
+				f->f1l2Control->Visible = FALSE;
+			}
 			int num = Convert::ToInt32(num_of_interp_points->Text);
 			if (ch_b_cubic->Checked && ch_b_linear->Checked) {
 				inter->SetNum(num);
-				inter->linear(p);
+				counter_l=inter->linear(p);
 				//std::cout << "\nCubic Spline Interpolation" << endl;
 				cubic->SetNum(num);
-				cubic->build_splines(p);
-				cubic->interpolate(p);
+				//cubic->build_splines(p);
+				counter_c=cubic->interpolate(p);
 				show_cubic_points(cubic);
 				show_linear_points(inter);
 				cubic_splines->Visible = TRUE;
 				print_linear(inter);
 				print_splines(cubic);
-				build_graphic(cubic);
 				build_line_graphic(inter);
+				build_graphic(cubic);
+				
+				f->f1l2Control->Visible = TRUE;
+				f->f1l2Control->Text = "Cubic spline interpolation:";
+				f->f1t2Control->Visible = TRUE;
+				f->f1t2Control->Text = Convert::ToString(counter_c);
+
+				f->f1l1Control->Visible = TRUE;
+				f->f1l1Control->Text = "Linear interpolation:";
+				f->f1t1Control->Visible = TRUE;
+				f->f1t1Control->Text = Convert::ToString(counter_l);
 
 			}
 			else if (ch_b_cubic->Checked) {
 				cubic->SetNum(num);
-				cubic->build_splines(p);
-				cubic->interpolate(p);
+				//cubic->build_splines(p);
+				counter_c=cubic->interpolate(p);
 				show_cubic_points(cubic);
 				cubic_splines->Visible = TRUE;
 				print_splines(cubic);
 				build_graphic(cubic);
+				f->f1l1Control->Visible = TRUE;
+				f->f1l1Control->Text = "Cubic spline interpolation:";
+				f->f1t1Control->Visible = TRUE;
+				f->f1t1Control->Text = Convert::ToString(counter_c);
 			}
 			else if (ch_b_linear->Checked) {
 				print_linear(inter);
 				inter->SetNum(num);
-				inter->linear(p);
+				counter_l=inter->linear(p);
 				show_linear_points(inter);
 				build_line_graphic(inter);
+				f->f1l1Control->Visible = TRUE;
+				f->f1l1Control->Text = "Linear interpolation:";
+				f->f1t1Control->Visible = TRUE;
+				f->f1t1Control->Text = Convert::ToString(counter_l);
+
 			}
 			else {
 				MessageBox::Show("You haven't chosen any method!");
@@ -206,7 +235,7 @@ System::Void kursova::MyForm::button2_Click(System::Object^ sender, System::Even
 		for (int i = 0; i < p->GetSize(); i++) {
 			value_table->Rows->Add(p->GetX(i), p->GetY(i));
 		}
-
+		
 
 
 	}
@@ -269,36 +298,48 @@ void kursova::MyForm::build_graphic(CubicSplineInterpolation* inter) {
 				   double a = inter->get_a_at(i);
 				   double dx = x - p->GetX(i);
 				   y = a + b * dx + c * dx * dx + d * dx * dx * dx;
-
+				   if (y > yMax) {
+					   yMax = y;
+					   chart->ChartAreas[0]->AxisY->Maximum = yMax + 1;
+					   
+				   }
+				   else if (y < yMin) {
+					   yMin = y;
+					   chart->ChartAreas[0]->AxisY->Minimum = yMin - 1;
+				   }
 				   chart->Series[0]->Points->AddXY(x, y);
 				   x += h;
 			   }
+			   
 		   }
 void kursova::MyForm::build_line_graphic(LinearInterpolation* inter) {
-			   double yMin, yMax;
-			   find_Y_M(yMin, yMax, p);
-			   chart->ChartAreas[0]->AxisX->Minimum = p->GetX(0) - 1;
-			   chart->ChartAreas[0]->AxisX->Maximum = p->GetX(p->GetSize() - 1) + 1;
+	double yMin, yMax;
+	find_Y_M(yMin, yMax, p);
+	chart->ChartAreas[0]->AxisX->Minimum = p->GetX(0) - 1;
+	chart->ChartAreas[0]->AxisX->Maximum = p->GetX(p->GetSize() - 1) + 1;
 
-			   chart->ChartAreas[0]->AxisY->Minimum = yMin - 1;
-			   chart->ChartAreas[0]->AxisY->Maximum = yMax + 1;
+	chart->ChartAreas[0]->AxisY->Minimum = yMin - 1;
+	chart->ChartAreas[0]->AxisY->Maximum = yMax + 1;
 
-			   double a = p->GetX(0), b = p->GetX(p->GetSize() - 1), h = 0.1, x, y;
-			   chart->Series[1]->Points->Clear();
-			   x = a;
-			   int i = 0;
-			   while (x < b) {
+	double a = p->GetX(0), b = p->GetX(p->GetSize() - 1), h = 0.1, x, y;
+	chart->Series[1]->Points->Clear();
+	x = a;
+	int i = 0;
+	while (x <= b) {
 
-				   y = p->GetY(i) +
-					   ((p->GetY(i + 1) - p->GetY(i)) / (p->GetX(i + 1) - p->GetX(i))) *
-					   (x - p->GetX(i));
-				   chart->Series[1]->Points->AddXY(x, y);
-				   x += h;
-				   if (x > p->GetX(i + 1)) {
-					   i++;
-				   }
-			   }
-		   }
+		y = p->GetY(i) +
+			((p->GetY(i + 1) - p->GetY(i)) / (p->GetX(i + 1) - p->GetX(i))) *
+			(x - p->GetX(i));
+
+		
+		chart->Series[1]->Points->AddXY(x, y);		
+		x += h;
+			if (x > p->GetX(i + 1)) {
+				i++;
+			}
+	}
+}
+
 
 System::Void kursova::MyForm::Clear_all_button_Click(System::Object^ sender, System::EventArgs^ e) {
 	chart->Series[0]->Points->Clear();
@@ -318,6 +359,8 @@ System::Void kursova::MyForm::Clear_all_button_Click(System::Object^ sender, Sys
 	L_interp_label->Visible = FALSE;
 	ch_b_cubic->Checked = FALSE;
 	ch_b_linear->Checked = FALSE;
+	file_name->Text = "";
+	characteristics->Checked = FALSE;
 	value_table->Rows->Clear();
 	Points* newp = new Points();
 	delete p;
@@ -331,24 +374,23 @@ System::Void kursova::MyForm::SaveToFile_Click(System::Object^ sender, System::E
 	if (cubic_inter_points->Rows->Count == 0 && linear_inter_points->Rows->Count == 0) {
 		MessageBox::Show("You can`t save results without interpolating!");
 	}
+	else if (file_name->Text == "") {
+		MessageBox::Show("You haven`t entered file name!");
+	}
 	else {
-		if (file_name->Visible == FALSE) {
-			file_name->Visible = TRUE;
-			input_name->Visible = TRUE;
-		}
-		else {
+		
 			if (ch_b_cubic->Checked && ch_b_linear->Checked) {
-				inter->write_to_file(p, marshal_as<string>(file_name->Text));
-				cubic->write_to_file(p, marshal_as<string>(file_name->Text));
+				inter->write_to_file(p, marshal_as<std::string>(file_name->Text));
+				cubic->write_to_file(p, marshal_as<std::string>(file_name->Text));
 
 			}
 			else if (ch_b_cubic->Checked) {
-				cubic->write_to_file(p, marshal_as<string>(file_name->Text));
+				cubic->write_to_file(p, marshal_as<std::string>(file_name->Text));
 			}
 			else if (ch_b_linear->Checked) {
-				inter->write_to_file(p, marshal_as<string>(file_name->Text));
+				inter->write_to_file(p, marshal_as<std::string>(file_name->Text));
 
 			}
-		}
+		
 	}
 }

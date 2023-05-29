@@ -1,0 +1,13 @@
+
+Cubic spline Interpolation 
+Point 1: (1 ; 1 )
+Point 2: (2 ; 2 )
+Interpolated points :
+( 1 ; 1 )
+( 1.2 ; 1.2 )
+( 1.4 ; 1.4 )
+( 1.6 ; 1.6 )
+( 1.8 ; 1.8 )
+( 2 ; 2 )
+Cubic splines :
+S1(x) = 0 *(x - 2)^3 + 0 *(x - 2)^2 + 1 *(x - 2) + 2
